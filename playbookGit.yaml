@@ -1,6 +1,6 @@
 ---
 - name: Test de Conexión de ansible
-  hosts: all
+  hosts: docker
   gather_facts: no
   tasks:
     - name: Hacer ping a los hosts
