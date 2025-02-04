@@ -1,5 +1,5 @@
 - name: Playbook ejecutado con Ansible-Pull
-  hosts: grupo
+  hosts: localhost
   become: yes  # Si necesitas permisos de sudo
 
   tasks:
