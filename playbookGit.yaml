@@ -1,7 +1,42 @@
 - name: Playbook ejecutado con Ansible-Pull
-  hosts: localhost
+  hosts: docker
   connection: local
   become: yes  # Si necesitas permisos de sudo
+
   tasks:
-    - name: Hacer ping a los hosts
-      ansible.builtin.ping:
+    - name: Verificar conectividad con el host
+      ping:
+
+    - name: Obtener información del sistema
+      command: uname -a
+      register: system_info
+
+    - name: Mostrar información del sistema
+      debug:
+        msg: "{{ system_info.stdout }}"
+
+    - name: Verificar actualizaciones disponibles (solo Debian/Ubuntu)
+      apt:
+        update_cache: yes
+      when: ansible_os_family == "Debian"
+
+    - name: Mostrar paquetes actualizables
+      command: apt list --upgradable
+      register: updates
+      changed_when: false
+      when: ansible_os_family == "Debian"
+
+    - name: Mostrar lista de paquetes actualizables
+      debug:
+        msg: "{{ updates.stdout_lines }}"
+      when: ansible_os_family == "Debian"
+
+    - name: Crear un archivo de registro
+      copy:
+        dest: /home/sebastian/ansible_log.txt
+        content: |
+          Última ejecución de Ansible-Pull:
+          - Fecha: {{ ansible_date_time.date }} - {{ ansible_date_time.time }}
+          - Sistema: {{ system_info.stdout }}
+          - Paquetes actualizables:
+          {{ updates.stdout if updates.stdout is defined else 'No disponible' }}
