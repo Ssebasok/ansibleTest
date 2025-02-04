@@ -1,5 +1,5 @@
 - name: Playbook ejecutado con Ansible-Pull
-  hosts: docker
+  hosts: grupo
   connection: local
   become: yes  # Si necesitas permisos de sudo
 
