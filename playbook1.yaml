@@ -1,6 +1,7 @@
----
-- name: Realizar ping a los hosts
-  hosts: all
+- name: Playbook de prueba de PING
+  hosts: grupo
+  connection: local
+  become: yes  # Si necesitas permisos de sudo
   tasks:
     - name: Hacer ping
       ping:
