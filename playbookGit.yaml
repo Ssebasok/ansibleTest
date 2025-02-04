@@ -1,8 +1,7 @@
----
-- name: Test de Conexión de ansible
-hosts: localhost
-connection: local
-  gather_facts: no
+- name: Playbook ejecutado con Ansible-Pull
+  hosts: localhost
+  connection: local
+  become: yes  # Si necesitas permisos de sudo
   tasks:
     - name: Hacer ping a los hosts
       ansible.builtin.ping:
