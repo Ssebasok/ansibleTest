@@ -1,6 +1,7 @@
 ---
 - name: Test de Conexión de ansible
-  hosts: docker
+hosts: localhost
+connection: local
   gather_facts: no
   tasks:
     - name: Hacer ping a los hosts
