@@ -1,5 +1,6 @@
 - name: Playbook ejecutado con Ansible-Pull
   hosts: grupo
+  connection: local
   become: yes  # Si necesitas permisos de sudo
 
   tasks:
@@ -39,3 +40,4 @@
           - Sistema: {{ system_info.stdout }}
           - Paquetes actualizables:
           {{ updates.stdout if updates.stdout is defined else 'No disponible' }}
+
