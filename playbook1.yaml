@@ -1,6 +1,5 @@
-- name: Playbook de prueba de PING
-  hosts: grupo
-  connection: local
+- name: Playbook ejecutado con Ansible-Pull
+  hosts: localhost
   become: yes  # Si necesitas permisos de sudo
   tasks:
     - name: Hacer ping
