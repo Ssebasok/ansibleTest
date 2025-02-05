@@ -1,9 +1,9 @@
-- name: Playbook ejecutado con Ansible-Pull
+- name: Ansible-Pull
   hosts: localhost
-  become: yes  # Si necesitas permisos de sudo
+  become: yes  # Permisos de sudo
 
   tasks:
-    - name: Verificar conectividad con el host
+    - name: Verificar conectividad
       ping:
 
     - name: Obtener información del sistema
@@ -14,7 +14,7 @@
       debug:
         msg: "{{ system_info.stdout }}"
 
-    - name: Verificar actualizaciones disponibles (solo Debian/Ubuntu)
+    - name: Verificar actualizaciones disponibles
       apt:
         update_cache: yes
       when: ansible_os_family == "Debian"
